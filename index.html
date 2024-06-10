@@ -14,6 +14,7 @@
             <div class="mode-buttons">
                 <button id="easyButton" class="mode-button">Easy</button>
                 <button id="hardButton" class="mode-button">Hard</button>
+                <button id="dailyPuzzleButton" class="mode-button">Daily Puzzle</button>
             </div>
         </div>
     </div>
@@ -42,8 +43,24 @@
             <button id="homeButton">Home</button>
         </div>
     </div>
+    <div id="daily-puzzle-screen" class="screen">
+        <div class="daily-puzzle-container">
+            <button id="homeButtonPuzzle" class="home-button">Home</button>
+            <h1>Daily Puzzle</h1>
+            <div class="target-number">Target: <span id="daily-target-number"></span></div>
+            <div class="input-numbers"></div>
+            <div class="operations"></div>
+            <div class="expression-box"></div>
+            <div class="live-result">Result: <span id="live-result">0</span></div>
+            <div class="buttons">
+                <button id="checkSolutionButton">Check Solution</button>
+                <button id="resetPuzzleButton">Reset</button>
+            </div>
+        </div>
+    </div>
     <script src="static/main.js"></script>
     <script src="static/easyMode.js"></script>
     <script src="static/hardMode.js"></script>
+    <script src="static/dailyPuzzle.js"></script>
 </body>
 </html>
