@@ -37,7 +37,7 @@ function generateTargetNumber(inputNumbers, gameMode) {
     }
   } else {
     while (iterations < 1000) {
-      const target = Math.floor(Math.random() * (25 - 10 + 1)) + 10;
+      const target = Math.floor(Math.random() * (20 - 10 + 1)) + 10; // Change range to 10-20
       const combinations = getCombinations(inputNumbers, 3, 6);
       const validCombos = combinations.filter(combo => combo.reduce((a, b) => a + b, 0) === target);
 
@@ -80,7 +80,8 @@ function checkAutoSubmit(inputNumbers, selectedIndices, targetNumber) {
 // Event Listener and DOM Manipulation Code
 document.addEventListener("DOMContentLoaded", function() {
   let score = 0;
-  let bestScore = localStorage.getItem('bestScore') ? parseInt(localStorage.getItem('bestScore')) : 0; // Load best score from localStorage
+  let bestScoreEasy = localStorage.getItem('bestScoreEasy') ? parseInt(localStorage.getItem('bestScoreEasy')) : 0; // Load best score for easy mode from localStorage
+  let bestScoreHard = localStorage.getItem('bestScoreHard') ? parseInt(localStorage.getItem('bestScoreHard')) : 0; // Load best score for hard mode from localStorage
   let inputNumbers = [];
   let targetNumber = 0;
   let selectedIndices = new Set();
@@ -271,11 +272,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelector('.final-score').textContent = `Final Score: ${score}`;
 
-    if (score > bestScore) {
-      bestScore = score;
-      localStorage.setItem('bestScore', bestScore); // Save the best score to localStorage
+    if (gameMode === 'easy') {
+      if (score > bestScoreEasy) {
+        bestScoreEasy = score;
+        localStorage.setItem('bestScoreEasy', bestScoreEasy); // Save the best score for easy mode to localStorage
+      }
+      document.querySelector('.best-score').textContent = `Best Score (Easy): ${bestScoreEasy}`;
+    } else {
+      if (score > bestScoreHard) {
+        bestScoreHard = score;
+        localStorage.setItem('bestScoreHard', bestScoreHard); // Save the best score for hard mode to localStorage
+      }
+      document.querySelector('.best-score').textContent = `Best Score (Hard): ${bestScoreHard}`;
     }
-    document.querySelector('.best-score').textContent = `Best Score: ${bestScore}`;
   }
 
   function endCurrentRound() {
