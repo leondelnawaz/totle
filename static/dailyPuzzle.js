@@ -37,8 +37,15 @@ function generateDailyTargetNumber(numbers) {
                 op = mulOp;
                 usedMul = true;
             } else if (!usedDiv) {
+                // Ensure division results in a whole number
                 op = divOp;
+                let num;
+                do {
+                    num = remainingNumbers.shift();
+                } while (numbers[0] % num !== 0);
+                expr += ` ${op} ${num}`;
                 usedDiv = true;
+                continue;
             } else if (!usedAdd) {
                 op = addSubOps[Math.floor(Math.random() * 2)];
                 usedAdd = true;
